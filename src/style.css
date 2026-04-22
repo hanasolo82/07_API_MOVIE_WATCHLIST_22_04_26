@@ -6,27 +6,47 @@
 
 body {
   margin: 0;
+  position: relative;
+}
 
-}
-header {
-  overflow: hidden;
-  max-height: 20.8rem;
-}
 /*-----------header------------------*/
-
+header {
+  
+  text-align: center;
+  
+}
+.header-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  overflow: hidden;
+  max-height: 20.8rem;  
+  margin: 0;
+  
+}
 .header-text {
   display: flex;
   align-items: center;
+  justify-content: space-around;
+  gap: 5rem;
+  width: 100%;
   position: absolute;
   z-index: 1;
+  
+}
+.header-text h3 {
+  
 }
 h1 {
   font-size: 4.2rem;
   color: white;
   font-weight: bold;
+  margin: 0;
 }
 h3 {
-  font-size: 1.4rem;
+  font-size: 1.7rem;
+  margin: 0;
 }
 a {
   text-decoration: none;
@@ -36,21 +56,50 @@ a {
 
 img {
   position: relative;
-  transform: translateY(-10%);
+  transform: translateY(20%);
   object-fit: cover;
   width: 100%;
   height: auto;
+  filter: brightness(20%);
    
+}
+form {
+  display: flex;
+  justify-content: center; /*input and button together*/
+  position: absolute;
+  top: 91%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 1.7rem;
+  margin: 0;
+  padding: 0;
+  
+}
+button {
+  padding: 0.4rem 1rem;
+  margin: 0;
+  height: 3.8rem;
+  border: 1.2px solid gainsboro;
+  border-radius: 0 5px 5px 0;
+  width: 10rem;
+}
+input {
+  border: 1.2px solid gainsboro;
+  width: 30rem;
+  margin: 0;
+  height: 3.8rem;
+  border-radius: 5px 0 0 5px;
 }
 /*----------------medias header-------------------------*/
 @media(min-width:50rem) {
   img { 
-      transform: translateY(-15%);
+      transform: translateY(25%);
   }  
 }
 @media(min-width:70rem) {
   img { 
-      transform: translateY(-20%);
+      transform: translateY(30%);
   }  
 }
 /*----------main content-------------*/
