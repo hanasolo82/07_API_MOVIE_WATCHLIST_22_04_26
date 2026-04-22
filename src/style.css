@@ -1,7 +1,59 @@
 *, ::before,::after {
   box-sizing: border-box;
   font-size: 62.5%;
+  font-family: "inter";
 }
 
+body {
+  margin: 0;
 
+}
+header {
+  overflow: hidden;
+  max-height: 20.8rem;
+}
+/*-----------header------------------*/
 
+.header-text {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  z-index: 1;
+}
+h1 {
+  font-size: 4.2rem;
+  color: white;
+  font-weight: bold;
+}
+h3 {
+  font-size: 1.4rem;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+/*---------imagen header-----------------------*/
+
+img {
+  position: relative;
+  transform: translateY(-10%);
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+   
+}
+/*----------------medias header-------------------------*/
+@media(min-width:50rem) {
+  img { 
+      transform: translateY(-15%);
+  }  
+}
+@media(min-width:70rem) {
+  img { 
+      transform: translateY(-20%);
+  }  
+}
+/*----------main content-------------*/
+main {
+  
+}
