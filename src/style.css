@@ -3,10 +3,13 @@
   font-size: 62.5%;
   font-family: "inter";
 }
-
+html {
+  
+}
 body {
   margin: 0;
   position: relative;
+  
 }
 
 /*-----------header------------------*/
@@ -55,7 +58,7 @@ a {
 /*---------imagen header-----------------------*/
 
 img {
-  position: relative;
+  
   transform: translateY(20%);
   object-fit: cover;
   width: 100%;
@@ -103,6 +106,37 @@ input {
   }  
 }
 /*----------main content-------------*/
+
 main {
+ 
+}
+
+
+main, .container-theme {
+  margin: 0;
+  padding: 0;
+
+}
+.container-theme {
+    border: 1px solid red;
+    position: absolute;
+    z-index: -1;
+    height: 100vh;
+    width: 100vw;
+     display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "..."
+      "svg"
+      "..."
+  ;
+}
+
+
+.no-data-svg {
+  grid-area: svg;
+  filter: invert(0); 
+  width: 15rem;
+  margin: 0 auto;
   
 }
