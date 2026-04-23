@@ -17,7 +17,7 @@
           <h1>Find your film</h1>
           <h3><a href="./src/pages/watchlist.html">My Watchlist</a></h3>
         </div>      
-        <img src="https://images.unsplash.com/photo-1628432136678-43ff9be34064?q=80&w=1926&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+        <img id="header-img" src="https://images.unsplash.com/photo-1628432136678-43ff9be34064?q=80&w=1926&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
       </div>
       <form id="search-form">
         <input
@@ -32,21 +32,21 @@
       </form>
     </header>
     <main>
-      <div class="container-theme">
+      <div class="container-theme filled" > <!--filled toggle-->
       <!--  INITIAL
         <img class="no-data-svg" id="no-data-svg" src="./src/assets/no-data-initial.svg" alt="">
        --> 
         <div class="box-film" id="box-film">
-            <img  class="movie-img" id="movie-img" alt="movie list id x">
+            <img  class="movie-img" id="movie-img" src="./src/assets/blade runner.png" alt="movie list id x">
             <div class="text-container" id="text-container">
               <!--Title-->
               <div class="title-box" id="title-box">
-                <div class="title" id="title">
-                  <h3>Blade runner</h3>
-                </div>
+                
+                  <h3 class="title-text" id="title-text">Blade runner</h3>
+                
                 <div class="title-calification" id="title-calification">
-                  <img class="" id="" alt="star">
-                  <p class="" id="">8.1</p>
+                  <img class="star" id="star" alt="star">
+                  <p class="star-num" id="star-num">8.1</p>
                 </div> 
               </div>
               <!--Title-->
