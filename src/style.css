@@ -59,7 +59,7 @@ img {
 }
 form {
   display: flex;
-  justify-content: center; /*input and button together*/
+  justify-content: center; /*----input and button together*/
   position: absolute; /*relative body---------*/
   top: 91%;
   bottom: 0;
@@ -146,11 +146,14 @@ main, .container-theme {
 
 }
 .container-theme {
-    border: 1px solid red;
+    
     position: absolute; /*relative body-------alows input to stay between img container and  main-----*/
     z-index: -1;
     min-height: calc(100vh - 20.8rem);
     width: 100vw;
+}
+.container-theme {
+  /*--------------------initial grid mobil first---*/
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas: 
@@ -168,3 +171,5 @@ main, .container-theme {
   margin: 0 auto;
   
 }
+/* main film list --------------grid */
+/**/
