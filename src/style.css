@@ -41,7 +41,13 @@ h1 {
 }
 h3 {
   font-size: 1.7rem;
+  font-weight: 600;
   margin: 0;
+}
+h4 {
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 500;
 }
 a {
   text-decoration: none;
@@ -127,12 +133,12 @@ input:focus {
 
 /*----------------medias header-------------------------*/
 @media(min-width:50rem) {
-  img { 
+  #header-img { 
       transform: translateY(25%);
   }  
 }
 @media(min-width:70rem) {
-  img { 
+  #header-img { 
       transform: translateY(30%);
   }  
 }
@@ -169,6 +175,7 @@ main, .container-theme {
   "... ... ..."
   "... svg ..."
   "... ... ..."
+  "... ... ..."
   ;
   gap: 4.4rem;
 }
@@ -188,51 +195,52 @@ main, .container-theme {
   grid-area: svg;
   margin: 0;
   padding: 0;
-  border: 1px solid;
+  border-top: 0.2rem solid #E5E7EB;
   display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
+ 
+  
 }
 
 .movie-img{
-  width: 9.9rem;
-  height: 15rem;
-  border: 1px solid;
+  border-radius: 0.3rem;
 }
 .text-container {
-   border: 1px solid red;
    margin-left: 2.1rem;
    display: flex;
    flex-direction: column;
 }
 .title-box {
   display: flex;
+  
   align-content: center;
   align-items: center;
-  border: 1px solid blue;
 }
 .title-calification {
   display: flex;
   align-items: center;
   flex-direction: row;
-  border: 1px solid aqua;
 }
 .title-text{
   padding: 0;
   margin: 0;
 }
 .star {
-  width: 1.4rem;
+  margin-left: 0.6rem;
+  width: 1.1rem;
 }
 .star-num {
   font-size: 1.2rem;
+  margin-left: 0.2rem;
 }
 
 .inline-container{
   display: flex;
   align-items: center;
-  gap: 7px;
+  margin-bottom: 1rem;
+  gap: 3rem;
 }
 .add-container {
   display: flex;
@@ -240,28 +248,32 @@ main, .container-theme {
   justify-items: center;
   align-items: center;
 }
-.add-btn{
-  font-size: 1.6rem;
+.add-btn {
+  font-size: 1.5rem;
   padding: 0;
   width: 1.4rem;
   height: 1.4rem;
   border-radius: 50%;
- /* center the text in this case "+"*/
+  border: none;
+  
+}
+/*center plus letter*/
+.add-btn {
+  background-color: black;
+  color: white;
+  line-height: 0.8;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 0;
-  line-height: 0;
-
-  border: none;
-  color: white;
-  background-color: black;
 }
 
-
+.add-container  h4 {
+  margin-left: 1rem;
+ 
+}
 
 .paragraf-info-container h3 {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 400;
   color: #6B7280;
+  line-height: 1.8rem;
 }
