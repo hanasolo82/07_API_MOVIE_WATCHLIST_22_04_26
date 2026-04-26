@@ -26,49 +26,62 @@ formEl.addEventListener("submit", getFormValue)
 
 
  async function getDataApi() {
-            const response = await fetch(baseAllUrl + `t=${input}&s=${input}`)
+            const response = await fetch(baseAllUrl + `s=${input}`)
             const data = await response.json()
-             dataApi = data.Search.slice(0,5)
-             for(let movie of dataApi) {
-
-               getDataMovie(movie.Title)
-
+            
+             dataApi = data.Search || data
+             const movies = Array.isArray(dataApi) ? dataApi : [dataApi]
+             
+             if(movies.length <= 1) {
+               container.innerHTML =`<p>${movies[0].Error}</p>` 
+             } else {
+              for(let movie of movies) {
+                
+                getDataMovie(movie.Title)
+               }
              }
-            // 
-            // console.log(dataApi)
+               
+            inputEl.value = ""
  }      
 formEl.addEventListener("submit", getDataApi)
 
+const dataArr = []
 async function getDataMovie(input) {
-            const response = await fetch(baseAllUrl + `t="${input}"`)
+            dataArr.length = 0
+            const response = await fetch(baseAllUrl + `t=${input}`)
             const data = await response.json()
-           // render(data.Search)
-            console.log(data)
+            dataArr.push(data)
+
+            render(dataArr.slice(0,4))
+            console.log(dataArr.map((data)=> data.imdbID))
             
 }
 
-function render(movie) {
-    const html = ` 
-         <div class="box-film" id="box-film" data-id="">
-            <img  class="movie-img" id="movie-img" src=""POster"" alt="movie list id x">
+function render(movies) {
+
+   container.innerHTML = movies.map((movie, index) => {
+    
+      return ` 
+         <div class="box-film" id="movie-${index}">
+            <img  class="movie-img" id="movie-img" src=${movie.Poster} alt="movie list id x">
             <div class="text-container" id="text-container">
               <!--Title-->
               <div class="title-box" id="title-box">
                 
-                  <h3 class="title-text" id="title-text">title</h3>
+                  <h3 class="title-text" id="title-text">${movie.Title}</h3>
                 
                 <div class="title-calification" id="title-calification">
                   <img class="star" id="star" alt="star" src="./src/assets/star.svg">
-                  <p class="star-num" id="star-num">8.1</p>
+                  <p class="star-num" id="star-num">${movie.imdbRating}</p>
                 </div> 
               </div>
               <!--Title-->
               <!--Inline info-->
               <div class="inline-container" id="inline-container">
-                <h4 class="inline-time" id="inline-time">113min</h4>
-                <h4 class="inline-list-tipo" id="inline-list-tipo">Action, Drama, Sci-fi</h4>
+                <h4 class="inline-time" id="inline-time">${movie.Runtime}</h4>
+                <h4 class="inline-list-tipo" id="inline-list-tipo">${movie.Genre}</h4>
                 <div class="add-container" id="add-container">
-                  <button type="button" class="add-btn" id="add-btn">+</button>
+                  <img class="add-img" src="src/assets/add.svg" data-id=${movie.imdbID}>
                   <h4>Watchlist</h4>
                 </div>
               </div>
@@ -76,16 +89,20 @@ function render(movie) {
                <!--Paragraf info-->
               <div class="paragraf-info-container" id="paragraf-info-container">
                 <h3>
-                  A blade runner must pursue and terminate four replicants who stole a ship in space, and have returned to Earth to find their creator.
+                ${movie.Plot}
                 </h3>
               </div>
                <!--Paragraf info-->
             </div>
         </div>`
- 
-    return  container.innerHTML = html
+    }).join('')
 }
+const addBtn = document.getElementById("add-img")
 
+container.addEventListener("click", (e)=>{
+  const movieId = e.target.dataset
+  console.log(movieId)
+})
 /*{
   Title: "Blade Runner",
   Year: "1982",

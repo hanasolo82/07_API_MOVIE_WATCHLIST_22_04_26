@@ -169,17 +169,38 @@ main, .container-theme {
   ;
 }
 .filled {
+  
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas: 
   "... ... ..."
-  "... svg ..."
-  "... ... ..."
+  "... mo0 ..."
+  "... mo1 ..."
+  "... mo2 ..."
+  "... mo3 ..."
+  "... mo4 ..."
   "... ... ..."
   ;
-  gap: 4.4rem;
-}
+  
+  
 
+}
+#movie-0 {
+  grid-area: mo0;
+  border: none;
+}
+#movie-1 {
+  grid-area: mo1;
+}
+#movie-2 {
+  grid-area: mo2;
+}
+#movie-3 {
+  grid-area: mo3;
+}
+#movie-4 {
+  grid-area: mo4;
+}
 .no-data-svg {
   grid-area: svg;
   filter: invert(0); 
@@ -192,9 +213,8 @@ main, .container-theme {
 
 
 .box-film {
-  grid-area: svg;
-  margin: 0;
-  padding: 0;
+  margin: 0 5rem;
+  padding: 5rem 0;
   border-top: 0.2rem solid #E5E7EB;
   display: flex;
   justify-content: center;
@@ -206,6 +226,7 @@ main, .container-theme {
 
 .movie-img{
   border-radius: 0.3rem;
+  max-width: 9.9rem;
 }
 .text-container {
    margin-left: 2.1rem;
@@ -248,23 +269,13 @@ main, .container-theme {
   justify-items: center;
   align-items: center;
 }
-.add-btn {
-  font-size: 1.5rem;
+.add-img {
   padding: 0;
   width: 1.4rem;
   height: 1.4rem;
-  border-radius: 50%;
-  border: none;
-  
 }
-/*center plus letter*/
-.add-btn {
-  background-color: black;
-  color: white;
-  line-height: 0.8;
-  display: flex;
-  justify-content: center;
-}
+
+
 
 .add-container  h4 {
   margin-left: 1rem;
