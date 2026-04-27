@@ -271,9 +271,11 @@ main, .container-theme {
 }
 .add-img {
   padding: 0;
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 3rem;
+  height: 3rem;
+  
 }
+
 
 
 
@@ -281,6 +283,7 @@ main, .container-theme {
   margin-left: 1rem;
  
 }
+
 
 .paragraf-info-container h3 {
   font-size: 1.4rem;

@@ -4,8 +4,11 @@ const searchBtn = document.getElementById("input-btn")
 const formEl = document.getElementById("search-form")
 const inputEl = document.getElementById("input-search")
 const container = document.getElementById("container-theme")
-
+const dataArr = []
+let moviesArrSelected = []
 let dataApi
+let movieIdClicked
+ let isSaved
 /*
 Poster: "https://m.media-amazon.com/images/M/MV5BOWQ4YTBmNTQtMDYxMC00NGFjLTkwOGQtNzdhNmY1Nzc1MzUxXkEyXkFqcGc@._V1_SX300.jpg"
 Title: "Blade Runner"
@@ -40,26 +43,30 @@ formEl.addEventListener("submit", getFormValue)
                 getDataMovie(movie.Title)
                }
              }
-               
+             
             inputEl.value = ""
  }      
 formEl.addEventListener("submit", getDataApi)
 
-const dataArr = []
+
 async function getDataMovie(input) {
+            
             dataArr.length = 0
             const response = await fetch(baseAllUrl + `t=${input}`)
             const data = await response.json()
             dataArr.push(data)
+            if (dataArr.length >= 1) {
+              container.classList.toggle("filled")
+            }
 
-            render(dataArr.slice(0,4))
-            console.log(dataArr.map((data)=> data.imdbID))
+            render()
+            
             
 }
 
-function render(movies) {
+function render() {
 
-   container.innerHTML = movies.map((movie, index) => {
+   container.innerHTML = dataArr.slice(0, 5).map((movie, index) => {
     
       return ` 
          <div class="box-film" id="movie-${index}">
@@ -81,7 +88,11 @@ function render(movies) {
                 <h4 class="inline-time" id="inline-time">${movie.Runtime}</h4>
                 <h4 class="inline-list-tipo" id="inline-list-tipo">${movie.Genre}</h4>
                 <div class="add-container" id="add-container">
-                  <img class="add-img" src="src/assets/add.svg" data-id=${movie.imdbID}>
+                  <img 
+                    class="add-img"
+                    id="add-img" 
+                    src="src/assets/figma-add.svg" 
+                    data-id=${movie.imdbID}>
                   <h4>Watchlist</h4>
                 </div>
               </div>
@@ -97,12 +108,58 @@ function render(movies) {
         </div>`
     }).join('')
 }
-const addBtn = document.getElementById("add-img")
+const addBtn = document.getElementById("add-container")
 
 container.addEventListener("click", (e)=>{
-  const movieId = e.target.dataset
-  console.log(movieId)
+  const id = e.target.dataset.id
+  if(!id) return 
+  if(id) {
+    handleMovie(id)
+    handleButton(e.target, id)
+  } 
+    
 })
+
+function handleMovie(windowId) {
+ const targetBtnObj = dataArr.filter((movie) =>{
+    return movie.imdbID === windowId
+  })[0]
+
+  console.log(targetBtnObj.imdbID, targetBtnObj)
+ // addStorage(targetBtnObj.imdbID, targetBtnObj)
+ // getStorage(targetBtnObj.imdbID)
+ // removeStorage(targetBtnObj.imdbID) 
+
+}
+// switch button
+function handleButton(target, windowId) {
+  const targetBtnObj = dataArr.find((movie) =>{
+    return movie.imdbID === windowId
+  })
+  const minus = "/src/assets/figma-minus.svg"
+  const plus = "/src/assets/figma-add.svg"
+
+  if(targetBtnObj && target.src.includes("add.svg")) {
+      target.src = minus
+      
+      
+      target.classList.toggle("minus-img")
+    }
+  else if(targetBtnObj && target.src.includes("minus.svg")) {
+      target.src = plus
+  }
+
+}
+
+function addStorage(movieId, targetBtnObj) {
+    localStorage.setItem(movieId, JSON.stringify(targetBtnObj))
+}
+function getStorage(movieId) {
+    JSON.parse(localStorage.getItem(movieId))
+}
+function removeStorage(movieId) {
+    localStorage.removeItem(movieId)
+}
 /*{
   Title: "Blade Runner",
   Year: "1982",
