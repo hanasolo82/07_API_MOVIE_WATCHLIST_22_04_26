@@ -4,7 +4,9 @@ const searchBtn = document.getElementById("input-btn")
 const formEl = document.getElementById("search-form")
 const inputEl = document.getElementById("input-search")
 const container = document.getElementById("container-theme")
+const Watchlist = document.getElementById("watchlist")
 const dataArr = []
+const localArr = []
 let moviesArrSelected = []
 let dataApi
 let movieIdClicked
@@ -24,14 +26,18 @@ function getFormValue(e) {
     return input 
     }
 }
-formEl.addEventListener("submit", getFormValue)
+ if(formEl)  formEl.addEventListener("submit", getFormValue)
+      
+      
+    
+
 /*------------------------info from input on click------------------------------*/
 
 
  async function getDataApi() {
             const response = await fetch(baseAllUrl + `s=${input}`)
             const data = await response.json()
-            
+            container.classList.toggle('filled')
              dataApi = data.Search || data
              const movies = Array.isArray(dataApi) ? dataApi : [dataApi]
              
@@ -46,8 +52,8 @@ formEl.addEventListener("submit", getFormValue)
              
             inputEl.value = ""
  }      
-formEl.addEventListener("submit", getDataApi)
 
+if(formEl)  formEl.addEventListener("submit", getDataApi)
 
 async function getDataMovie(input) {
             
@@ -59,14 +65,14 @@ async function getDataMovie(input) {
               container.classList.toggle("filled")
             }
 
-            render()
+            render(dataArr)
             
             
 }
 
-function render() {
+function render(arr) {
 
-   container.innerHTML = dataArr.slice(0, 5).map((movie, index) => {
+   container.innerHTML = arr.slice(0, 5).map((movie, index) => {
     
       return ` 
          <div class="box-film" id="movie-${index}">
@@ -114,52 +120,75 @@ container.addEventListener("click", (e)=>{
   const id = e.target.dataset.id
   if(!id) return 
   if(id) {
-    handleMovie(id)
+    
     handleButton(e.target, id)
   } 
     
 })
 
-function handleMovie(windowId) {
- const targetBtnObj = dataArr.filter((movie) =>{
-    return movie.imdbID === windowId
-  })[0]
 
-  console.log(targetBtnObj.imdbID, targetBtnObj)
- // addStorage(targetBtnObj.imdbID, targetBtnObj)
- // getStorage(targetBtnObj.imdbID)
- // removeStorage(targetBtnObj.imdbID) 
-
-}
-// switch button
+// switch button and localstorage
 function handleButton(target, windowId) {
-  const targetBtnObj = dataArr.find((movie) =>{
+  const targetBtn = dataArr.find((movie) =>{
     return movie.imdbID === windowId
   })
+  /*
+  const targetObj = dataArr.filter((movie) =>{
+    return movie.imdbID === windowId
+  })[0] 
+  */
   const minus = "/src/assets/figma-minus.svg"
   const plus = "/src/assets/figma-add.svg"
 
-  if(targetBtnObj && target.src.includes("add.svg")) {
+  if(targetBtn && target.src.includes("add.svg")) {
       target.src = minus
-      
-      
       target.classList.toggle("minus-img")
+      addStorage(windowId, targetBtn)
+
     }
-  else if(targetBtnObj && target.src.includes("minus.svg")) {
+  else if(targetBtn && target.src.includes("minus.svg")) {
       target.src = plus
+      removeStorage("movies")
   }
 
 }
 
 function addStorage(movieId, targetBtnObj) {
     localStorage.setItem(movieId, JSON.stringify(targetBtnObj))
+  
 }
 function getStorage(movieId) {
     JSON.parse(localStorage.getItem(movieId))
 }
 function removeStorage(movieId) {
     localStorage.removeItem(movieId)
+    render(localArr)
 }
+// render localstorage 
+if(Watchlist){
+  
+  Watchlist.addEventListener("click", (e)=> {
+    e.preventDefault()
+    
+    const localArr = renderStorage()
+  
+    return render(localArr)
+})
+}
+
+
+
+function renderStorage() {
+  
+  for (const key of Object.keys(localStorage)) {
+  const value = localStorage.getItem(key)
+  localArr.push(JSON.parse(value))
+}
+  //const movies = Array.isArray(dataApi) ? dataApi : [dataApi]
+ return localArr
+}
+
+
 /*{
   Title: "Blade Runner",
   Year: "1982",
@@ -195,23 +224,4 @@ function removeStorage(movieId) {
 
 
 
-/*function getFormValue(e) {
-    e.preventDefault()
-    const inputValue = inputEl.value
-    
-    if(inputValue) {
-        async function dataApi() {
-            const response = await fetch(baseAllUrl + `s=${inputValue}`)
-            const data = await response.json()
-            console.log(data.Search.slice(0, 3))
-            //const shortData = data.slice(0, 1)
-           // localStorage.setItem("movies info", JSON.stringify(data))
-           // console.log(shortData)
-            }
-             dataApi() 
-    }
-    
-    
-    
-}*/
 
