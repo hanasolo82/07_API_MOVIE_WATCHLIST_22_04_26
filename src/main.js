@@ -5,8 +5,9 @@ const formEl = document.getElementById("search-form")
 const inputEl = document.getElementById("input-search")
 const container = document.getElementById("container-theme")
 const Watchlist = document.getElementById("watchlist")
+const home = document.getElementById("home")
 const dataArr = []
-const localArr = []
+
 let moviesArrSelected = []
 let dataApi
 let movieIdClicked
@@ -148,7 +149,8 @@ function handleButton(target, windowId) {
     }
   else if(targetBtn && target.src.includes("minus.svg")) {
       target.src = plus
-      removeStorage("movies")
+      removeStorage(windowId)
+      
   }
 
 }
@@ -165,21 +167,38 @@ function removeStorage(movieId) {
     render(localArr)
 }
 // render localstorage 
-if(Watchlist){
-  
-  Watchlist.addEventListener("click", (e)=> {
-    e.preventDefault()
-    
-    const localArr = renderStorage()
-  
-    return render(localArr)
+if(home) {
+home.addEventListener("click", () =>{
+  container.classList.toggle('filled')
+
 })
 }
+  
+  document.addEventListener("DOMContentLoaded", ()=> {
 
+    
+if (window.location.pathname.includes("watchlist.html")) {
+    const localArr = renderStorage();
+    if (localArr.length > 0) {
+      render(localArr);
+    } else {
+      container.innerHTML = `<p>Tu lista está vacía.</p>`;
+    }
+  }
+});
+    
+    
+   
+
+
+
+  
+  
 
 
 function renderStorage() {
   
+  const localArr = []
   for (const key of Object.keys(localStorage)) {
   const value = localStorage.getItem(key)
   localArr.push(JSON.parse(value))
